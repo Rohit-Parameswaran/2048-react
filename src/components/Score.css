@@ -1,0 +1,20 @@
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  background-color: #251234;
+  padding: 20px 0;
+  border-radius: 20px;
+  animation: appear 500ms;
+  min-width: 200px;
+}
+
+.scoreboard__heading {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.score {
+  text-align: center;
+  font-size: 2rem;
+}

@@ -1,10 +1,10 @@
 .board {
   display: grid;
+  margin: 50px;
   row-gap: 15px;
   column-gap: 15px;
   -webkit-animation: appear 0.5s both;
   animation: appear 0.5s both;
-  position: absolute;
   min-width: 500px;
   min-height: 500px;
   grid-template-columns: repeat(4, 1fr);
@@ -12,22 +12,28 @@
 }
 
 @-webkit-keyframes appear {
-    0% {
-      -webkit-transform: scale(0.5);
-              transform: scale(0.5);
-    }
-    100% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-    }
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
   }
-  @keyframes appear {
-    0% {
-      -webkit-transform: scale(0.5);
-              transform: scale(0.5);
-    }
-    100% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-    }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
+}
+@keyframes appear {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+
+  35% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}

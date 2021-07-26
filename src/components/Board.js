@@ -15,7 +15,7 @@ let permittedKeys = [
 
 const boardSize = 4;
 
-function Board() {
+function Board(props) {
   const [grid, _setGrid] = useState();
 
   const gridRef = React.useRef(grid);
@@ -23,14 +23,18 @@ function Board() {
     gridRef.current = board;
     _setGrid(board);
   };
-
   //Event listener for handling keypress. Event handlers can't use updated state values directly and therefore useRef hook has to be used
   const handleKeyDown = (e) => {
     //If pressed key is not a valid game control key ignore the keydown event
     if (permittedKeys.indexOf(e.code) === -1) return;
     //Else
     else if (gridRef.current) {
-      const updatedBoard = performMove(e.code, gridRef.current, boardSize);
+      const updatedBoard = performMove(
+        e.code,
+        gridRef.current,
+        boardSize,
+        props.handleScore
+      );
       if (updatedBoard) setGrid(generateNext(updatedBoard, boardSize));
     }
   };
@@ -58,14 +62,15 @@ function Board() {
   return <div className="board">{renderCells}</div>;
 }
 
-const performMove = (pressedKey, _board, boardSize) => {
+const performMove = (pressedKey, _board, boardSize, handleScore) => {
   //Move cells in pressedKey-direction till they hit another block
   //Eg:When left key is pressed
   //256 empty 256 64 becomes
   //256 256 64 empty
   // const _board = [..._board];
+  let scoreUpdates = 0;
   let board = [];
-  for(let i=0;i<boardSize;++i) {
+  for (let i = 0; i < boardSize; ++i) {
     const row = [..._board[i]];
     board.push(row);
   }
@@ -137,6 +142,7 @@ const performMove = (pressedKey, _board, boardSize) => {
         for (let x = 0; x < boardSize - 1; ++x) {
           if (newRow[x] === newRow[x + 1]) {
             newRow[x] *= 2;
+            scoreUpdates += newRow[x];
             newRow[x + 1] = 0;
           }
         }
@@ -146,6 +152,7 @@ const performMove = (pressedKey, _board, boardSize) => {
         for (let x = boardSize; x > 0; --x) {
           if (newRow[x] === newRow[x - 1]) {
             newRow[x] *= 2;
+            scoreUpdates += newRow[x];
             newRow[x - 1] = 0;
           }
         }
@@ -163,6 +170,7 @@ const performMove = (pressedKey, _board, boardSize) => {
         for (let i = 0; i < boardSize - 1; ++i) {
           if (board[i][j] && board[i][j] === board[i + 1][j]) {
             board[i][j] *= 2;
+            scoreUpdates += board[i][j];
             board[i + 1][j] = 0;
           }
         }
@@ -171,6 +179,7 @@ const performMove = (pressedKey, _board, boardSize) => {
         for (let i = boardSize - 1; i > 0; --i) {
           if (board[i][j] && board[i][j] === board[i - 1][j]) {
             board[i][j] *= 2;
+            scoreUpdates += board[i][j];
             board[i - 1][j] = 0;
           }
         }
@@ -179,6 +188,8 @@ const performMove = (pressedKey, _board, boardSize) => {
   }
   if (JSON.stringify(_board) === JSON.stringify(board)) return false;
 
+  debugger;
+  handleScore(scoreUpdates);
   return board;
 };
 

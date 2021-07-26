@@ -3,8 +3,10 @@ body {
 }
 
 .container {
+    margin: 10px 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     min-height: 100vh;
     align-items: center;
     color: #d9e4ee;

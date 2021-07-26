@@ -1,12 +1,10 @@
 .cell {
     display: flex;
     background-color: #054690;
-    font-size: 40px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     cursor: grab;
-    user-select: none;
 }
 
 .tile {
