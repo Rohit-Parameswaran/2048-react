@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Board from "./Board";
 import Score from "./Score";
+import Instructions from './Instructions'
 
 function Game() {
   const [score, setScore] = useState(0);
@@ -14,10 +15,8 @@ function Game() {
   return (
     <>
       <Score score={score} />
-      <Board handleScore={_setScore} />
-      <div className="scoreboard">
-        <center>Something static</center>
-      </div>
+      <Board handleScore={_setScore}/>
+      <Instructions />
     </>
   );
 }

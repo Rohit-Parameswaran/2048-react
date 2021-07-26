@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSwipeable } from "react-swipeable";
 import Cell from "./Cell";
 import "./Board.css";
 
@@ -35,7 +36,8 @@ function Board(props) {
         boardSize,
         props.handleScore
       );
-      if (updatedBoard) setGrid(generateNext(updatedBoard, boardSize));
+      if (updatedBoard)
+        setGrid(generateNext(updatedBoard, boardSize));
     }
   };
 
@@ -59,7 +61,28 @@ function Board(props) {
       row.map((col, j) => <Cell key={i * boardSize + j} value={grid[i][j]} />)
     );
 
-  return <div className="board">{renderCells}</div>;
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      handleKeyDown({ code: permittedKeys[6] });
+    },
+    onSwipedRight: () => {
+      handleKeyDown({ code: permittedKeys[2] });
+    },
+    onSwipedUp: () => {
+      handleKeyDown({ code: permittedKeys[0] });
+    },
+    onSwipedDown: () => {
+      handleKeyDown({ code: permittedKeys[4] });
+    },
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
+  return (
+    <div className="board" {...handlers}>
+      {renderCells}
+    </div>
+  );
 }
 
 const performMove = (pressedKey, _board, boardSize, handleScore) => {
@@ -188,7 +211,6 @@ const performMove = (pressedKey, _board, boardSize, handleScore) => {
   }
   if (JSON.stringify(_board) === JSON.stringify(board)) return false;
 
-  debugger;
   handleScore(scoreUpdates);
   return board;
 };

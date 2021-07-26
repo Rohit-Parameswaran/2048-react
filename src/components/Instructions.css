@@ -1,0 +1,33 @@
+.instructions {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 200px;
+}
+
+.instructions > div {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.instruction-arrow-img {
+  width: 7rem;
+  height: 7rem;
+}
+.instruction-swipe-img {
+  width: 4rem;
+  height: 4rem;
+  animation: 1s 100 ease swipe;
+}
+
+@keyframes swipe {
+  0% {
+    transform: translateX(-50px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}

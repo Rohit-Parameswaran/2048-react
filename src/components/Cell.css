@@ -10,10 +10,13 @@
 .tile {
     background-color: #0ff15b;
     animation: appear 0.5s both;
+    font-size: 40px;
 }
 
 .tile > img{
     border-radius: 10px;
     width: 95%;
     height: 95%;
+    -webkit-user-drag: none;
+    user-drag: none;
 }
