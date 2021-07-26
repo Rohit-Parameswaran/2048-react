@@ -4,5 +4,18 @@
     font-size: 40px;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 10px;
+    cursor: grab;
+    user-select: none;
+}
+
+.tile {
+    background-color: #0ff15b;
+    animation: appear 0.5s both;
+}
+
+.tile > img{
+    border-radius: 10px;
+    width: 95%;
+    height: 95%;
 }
