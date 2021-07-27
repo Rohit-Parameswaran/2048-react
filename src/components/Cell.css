@@ -4,12 +4,11 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    cursor: grab;
 }
 
 .tile {
     background-color: #0ff15b;
-    animation: appear 0.5s both;
+    animation: appear 750ms both;
     font-size: 40px;
 }
 

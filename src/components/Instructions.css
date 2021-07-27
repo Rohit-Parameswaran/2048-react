@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   flex-direction: column;
   max-width: 200px;
+  animation: appear 750ms;
 }
 
 .instructions > div {
@@ -19,7 +20,7 @@
 .instruction-swipe-img {
   width: 4rem;
   height: 4rem;
-  animation: 1s 100 ease swipe;
+  animation: 1s 10 ease-in-out swipe;
 }
 
 @keyframes swipe {

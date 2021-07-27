@@ -23,7 +23,9 @@ function Board(props) {
   const setGrid = (board) => {
     gridRef.current = board;
     _setGrid(board);
+    localStorage.setItem("board", JSON.stringify(board));
   };
+
   //Event listener for handling keypress. Event handlers can't use updated state values directly and therefore useRef hook has to be used
   const handleKeyDown = (e) => {
     //If pressed key is not a valid game control key ignore the keydown event
@@ -36,8 +38,30 @@ function Board(props) {
         boardSize,
         props.handleScore
       );
-      if (updatedBoard)
-        setGrid(generateNext(updatedBoard, boardSize));
+      if (updatedBoard) setGrid(generateNext(updatedBoard, boardSize));
+      for (let i = 0; i < boardSize; ++i)
+        for (let j = 0; j < boardSize; ++j) if (!gridRef.current[i][j]) return;
+
+      const rdir = [-1, 0, 0, 1];
+      const cdir = [0, -1, 1, 0];
+
+      for (let i = 0; i < boardSize; ++i) {
+        for (let j = 0; j < boardSize; ++j) {
+          for (let x = 0; x < 4; ++x) {
+            const row = i + rdir[x];
+            const col = j + cdir[x];
+            if (
+              row >= 0 &&
+              col >= 0 &&
+              row < boardSize &&
+              col < boardSize &&
+              gridRef.current[i][j] === gridRef.current[row][col]
+            )
+              return;
+          }
+        }
+      }
+      props.gameOver();
     }
   };
 
@@ -61,6 +85,7 @@ function Board(props) {
       row.map((col, j) => <Cell key={i * boardSize + j} value={grid[i][j]} />)
     );
 
+  //hook to implement swipe controls
   const handlers = useSwipeable({
     onSwipedLeft: () => {
       handleKeyDown({ code: permittedKeys[6] });
@@ -222,6 +247,9 @@ function generateNext(board, boardSize) {
     for (let j = 0; j < boardSize; ++j)
       if (!board[i][j]) available.push(i * boardSize + j);
 
+  if (available.length === 0) {
+    return false;
+  }
   let el = Math.floor(Math.random() * available.length);
   let i = Math.floor(available[el] / boardSize);
   let j = Math.floor(available[el] % boardSize);
@@ -231,7 +259,12 @@ function generateNext(board, boardSize) {
 }
 
 function getBoard(boardSize) {
-  let board = [];
+  let board = JSON.parse(localStorage.getItem("board"));
+  if (board) {
+    return board;
+  }
+
+  board = [];
   for (let i = 0; i < boardSize; ++i) {
     const row = [];
     for (let j = 0; j < 4; ++j) row.push(0);
