@@ -39,9 +39,17 @@ function Board(props) {
         props.handleScore
       );
       if (updatedBoard) setGrid(generateNext(updatedBoard, boardSize));
-      for (let i = 0; i < boardSize; ++i)
-        for (let j = 0; j < boardSize; ++j) if (!gridRef.current[i][j]) return;
 
+      let empty = false;
+      for (let i = 0; i < boardSize; ++i)
+        for (let j = 0; j < boardSize; ++j)
+          if (!gridRef.current[i][j]) empty = true;
+          else if (gridRef.current[i][j] === 2048) {
+            window.removeEventListener("keydown", handleKeyDown);
+            props.setGameWon(true);
+          }
+
+      if (empty) return;
       const rdir = [-1, 0, 0, 1];
       const cdir = [0, -1, 1, 0];
 
@@ -64,7 +72,7 @@ function Board(props) {
       props.gameOver();
     }
   };
-
+  
   //creating a 4x4 board when component mounts
   //Note: Always add event listeners when a component mounts. Doing it inside the functional component's body re-renders exponentially
   useEffect(() => {

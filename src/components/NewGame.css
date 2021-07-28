@@ -21,7 +21,8 @@
   cursor: pointer;
 }
 
-.game-over-popup {
+.game-over-popup,
+.new-game-popup {
   display: none;
   flex-direction: column;
   position: fixed;
@@ -35,6 +36,46 @@
   border-radius: 30px;
   padding: 3rem;
   z-index: 5; /* Higher than the z-index of the background */
+}
+
+.close-popup {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #0ff15aca;
+  top: -5px;
+  right: -35px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: 300ms ease;
+}
+
+.close-popup:hover {
+  background-color: rgba(235, 69, 69, 1);
+  transition: 300ms ease;
+}
+
+.close-popup:before,
+.close-popup:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 25px;
+  width: 2px;
+}
+
+.close-popup:before {
+  background-color: #27134d;
+  transition: 300ms ease;
+  transform: rotate(45deg);
+}
+.close-popup:after {
+  background-color: #27134d;
+  transition: 300ms ease;
+  transform: rotate(-45deg);
 }
 
 .confirmation-text {
