@@ -44,7 +44,7 @@ function Board(props) {
       for (let i = 0; i < boardSize; ++i)
         for (let j = 0; j < boardSize; ++j)
           if (!gridRef.current[i][j]) empty = true;
-          else if (gridRef.current[i][j] === 2048) {
+          else if (gridRef.current[i][j] === 1024) {
             window.removeEventListener("keydown", handleKeyDown);
             props.setGameWon(true);
           }
@@ -72,7 +72,7 @@ function Board(props) {
       props.gameOver();
     }
   };
-  
+
   //creating a 4x4 board when component mounts
   //Note: Always add event listeners when a component mounts. Doing it inside the functional component's body re-renders exponentially
   useEffect(() => {
