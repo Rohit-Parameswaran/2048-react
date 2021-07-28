@@ -5,39 +5,30 @@ import "./Confetti.css";
 
 function Confetti(props) {
   useEffect(() => {
-    var duration = 15 * 1000;
-    var animationEnd = Date.now() + duration;
-    var skew = 1;
+    const colors = ["#E7F61C", "#5B91D2"];
 
-    function randomInRange(min, max) {
-      return Math.random() * (max - min) + min;
-    }
-
+    var end = Date.now() + (15 * 1000);
+    
     (function frame() {
-      var timeLeft = animationEnd - Date.now();
-      var ticks = Math.max(200, 500 * (timeLeft / duration));
-      skew = Math.max(0.8, skew - 0.001);
-
       confetti({
-        particleCount: 4,
-        startVelocity: 0,
-        ticks: ticks,
-        origin: {
-          x: Math.random(),
-          // since particles fall down, skew start toward the top
-          y: Math.random() * skew - 0.2,
-        },
-        colors: ["#ffffff", "#E7F61C", "#5B91D2", "#DE1111"],
-        shapes: ["circle"],
-        gravity: randomInRange(0.4, 0.6),
-        scalar: randomInRange(0.4, 1),
-        drift: randomInRange(-0.4, 0.4),
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: colors
       });
-
-      if (timeLeft > 0) {
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: colors
+      });
+    
+      if (Date.now() < end) {
         requestAnimationFrame(frame);
       }
-    })();
+    }());
   }, []);
 
   return (
