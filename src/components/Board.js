@@ -44,7 +44,7 @@ function Board(props) {
       for (let i = 0; i < boardSize; ++i)
         for (let j = 0; j < boardSize; ++j)
           if (!gridRef.current[i][j]) empty = true;
-          else if (gridRef.current[i][j] === 1024) {
+          else if (gridRef.current[i][j] === 2048) {
             window.removeEventListener("keydown", handleKeyDown);
             props.setGameWon(true);
           }
