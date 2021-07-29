@@ -1,10 +1,16 @@
 .btn-container {
   display: flex;
   flex: 1 1 100%;
+  padding-top: 20px;
   justify-content: center;
   align-items: center;
 }
 
+@media (max-width: 850px) {
+  .btn-container {
+    padding-bottom: 30px;
+  }
+}
 .confirmation-button {
   display: inline-flex;
   background-color: transparent;
@@ -89,8 +95,7 @@
 
 .button-container {
   display: flex;
-  margin-top: auto;
-  justify-content: space-between;
+  justify-content: space-between;;
 }
 
 .game-over-bg {

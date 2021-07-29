@@ -4,6 +4,7 @@
   flex-direction: column;
   max-width: 200px;
   animation: appear 750ms;
+  margin-bottom: 20px;
 }
 
 .instructions > div {

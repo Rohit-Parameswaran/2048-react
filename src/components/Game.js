@@ -33,6 +33,7 @@ function Game() {
   return (
     <>
       {gameWon && <Confetti startNewGame={startNewGame}/>}
+      <NewGame startNewGame={startNewGame} />
       <Score score={score} />
       <Board
         handleScore={_setScore}
@@ -40,7 +41,6 @@ function Game() {
         setGameWon={setGameWon}
       />
       <Instructions />
-      <NewGame startNewGame={startNewGame} />
     </>
   );
 }

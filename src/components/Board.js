@@ -31,7 +31,8 @@ function Board(props) {
     //If pressed key is not a valid game control key ignore the keydown event
     if (permittedKeys.indexOf(e.code) === -1) return;
     //Else
-    else if (gridRef.current) {
+    if (e.preventDefault) e.preventDefault();
+    if (gridRef.current) {
       const updatedBoard = performMove(
         e.code,
         gridRef.current,
@@ -83,7 +84,7 @@ function Board(props) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   //function that renders all the 4x4 cells
   // CORRECTION - Give every cell a key
@@ -154,6 +155,8 @@ const performMove = (pressedKey, _board, boardSize, handleScore) => {
     case permittedKeys[7]:
       left = true;
       break;
+    default:
+      break;
   }
 
   //Function that groups all elements in a row together
@@ -218,7 +221,7 @@ const performMove = (pressedKey, _board, boardSize, handleScore) => {
     }
   }
   //Handle up or down moves
-  else {
+  else if(up || down) {
     board = groupCol(board);
     for (let j = 0; j < boardSize; ++j) {
       //Up move

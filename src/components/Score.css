@@ -1,6 +1,7 @@
 .scoreboard {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   background-color: #251234;
   padding: 20px 0;
   border-radius: 20px;

@@ -10,7 +10,7 @@ import img_512 from "./512.jpg";
 import img_1024 from "./1024.jpg";
 import img_2048 from "./2048.jpg";
 
-export default {
+const images = {
   2: img_2,
   4: img_4,
   8: img_8,
@@ -23,3 +23,4 @@ export default {
   1024: img_1024,
   2048: img_2048,
 };
+export default images;

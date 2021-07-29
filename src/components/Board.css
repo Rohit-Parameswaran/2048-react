@@ -12,6 +12,15 @@
   cursor: grab;
 }
 
+@media (max-width: 560px) {
+  .board {
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 70vmin;
+    max-height: 70vmin;
+  }
+}
+
 @-webkit-keyframes appear {
   0% {
     -webkit-transform: scale(0.5);
