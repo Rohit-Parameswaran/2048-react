@@ -7,6 +7,12 @@
   margin-bottom: 20px;
 }
 
+@media (max-width: 620px) {
+  .instructions {
+    display: none;
+  }
+}
+
 .instructions > div {
   font-size: 1.2rem;
   display: flex;

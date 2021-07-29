@@ -16,8 +16,8 @@
   .board {
     min-width: 300px;
     min-height: 300px;
-    max-width: 70vmin;
-    max-height: 70vmin;
+    max-width: 90vmin;
+    max-height: 90vmin;
   }
 }
 
